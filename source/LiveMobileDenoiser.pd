@@ -1,0 +1,566 @@
+#N canvas 0 23 1280 697 10;
+#X text 639 -79 -- RTAP FINAL PROJECT: MOBILE DENOISER --;
+#X obj 86 22 receive fromGUI;
+#X obj 86 48 list trim;
+#X obj 41 55 print;
+#X obj 39 177 s recordMASK;
+#X floatatom 166 108 5 0 0 0 - - -;
+#X floatatom 421 109 5 0 0 0 - - -;
+#X obj 421 177 s MASKslider;
+#X floatatom 499 115 5 0 0 0 - - -;
+#X obj 499 177 s VOLUMEslider;
+#X text 120 -11 -- Receive Parameters from Graphical User Interface
+--;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array soundwave 300 float 1;
+#A 0 -0.000438541 -0.000408854 -0.000296329 -0.000111449 2.78322e-05
+0.000173829 0.000196215 0.000119417 0.000104312 8.70088e-05 0.000114895
+0.000124536 0.000225373 0.000457666 0.000703358 0.000825232 0.000754581
+0.000774902 0.000725263 0.000649079 0.000680332 0.000580172 0.000715154
+0.000919012 0.00086936 0.000845763 0.000849966 0.000741323 0.000686721
+0.000741164 0.000690751 0.000809259 0.000993198 0.000946455 0.000824924
+0.000681514 0.000539522 0.000347013 0.000231127 0.000174038 0.000248169
+0.000314767 0.000253548 0.000393335 0.000473001 0.000418916 0.000415093
+0.000436885 0.00051522 0.000582507 0.000575664 0.000630143 0.000729443
+0.000911617 0.00107561 0.000946917 0.000778138 0.00064834 0.000600481
+0.000567005 0.000384789 0.000305639 0.000236363 0.000158372 9.5725e-05
+0.000129969 0.000358497 0.000515176 0.000623698 0.000637307 0.00058379
+0.000469715 0.000332336 0.000273184 0.000210087 0.000328955 0.00046097
+0.000489765 0.000526776 0.000458161 0.000326546 0.000199769 0.000104266
+7.58025e-05 0.000152273 0.000279155 0.000406218 0.000358359 6.86062e-05
+-0.000186319 -0.000397387 -0.00062499 -0.000672111 -0.000598264 -0.000521816
+-0.000377979 -0.00030646 -0.000191322 -0.000121865 -0.000145806 -0.000154676
+-0.000233895 -0.000217223 -0.000195819 -0.000140079 -4.41316e-05 8.59629e-05
+0.000232462 0.000276616 0.000205832 7.31565e-05 1.14536e-05 -5.03161e-05
+-9.23765e-05 -2.28387e-05 5.55507e-05 -0.000130058 -0.000358918 -0.000499373
+-0.000693204 -0.000777295 -0.000807127 -0.000871097 -0.000877996 -0.000776973
+-0.000737878 -0.0007129 -0.000572811 -0.000506422 -0.000388512 -0.000179658
+-0.000113567 -3.01877e-05 -1.14809e-05 -6.94324e-05 -9.84311e-05 -0.000260058
+-0.000306862 -0.000323341 -0.000257618 -4.73622e-05 -2.53512e-05 -3.06616e-05
+-0.000125322 -0.000323217 -0.000464387 -0.000572658 -0.00074793 -0.000806582
+-0.00066813 -0.000629319 -0.000614372 -0.000582948 -0.000529032 -0.000486592
+-0.000513911 -0.000540001 -0.000495371 -0.000332704 -0.000121049 -6.92394e-05
+-0.000107786 -5.95509e-05 -0.000181032 -0.000319396 -0.000348027 -0.00039994
+-0.000381123 -0.000407596 -0.000426206 -0.000431728 -0.000538724 -0.000509328
+-0.000380625 -0.000361412 -0.000380191 -0.000421453 -0.000546499 -0.000628711
+-0.000495881 -0.000345465 -0.000189855 -3.04731e-05 -0.000112623 -0.000287774
+-0.000434661 -0.000435163 -0.000315874 -0.000220366 -6.70288e-05 -2.89843e-06
+-8.12227e-05 -0.000196996 -0.000349485 -0.000391495 -0.000396134 -0.00036222
+-0.000235672 -0.000281297 -0.000289815 -0.000240348 -0.000278755 -0.000271774
+-0.000295918 -0.00030746 -0.000350923 -0.00033043 -0.000181069 -0.000179538
+-0.000239129 -0.00020179 -0.000282192 -0.000446603 -0.000427025 -0.000394931
+-0.000291982 4.63287e-06 0.000236653 0.000315918 0.000280414 0.000225263
+0.000172545 0.000124607 0.000104191 4.34617e-07 -0.000203016 -0.000273862
+-0.000276173 -0.000317657 -0.000281623 -0.000260056 -0.000199194 -0.000186703
+-0.000251083 -0.000228237 -0.000102673 0.000187406 0.000402414 0.000486361
+0.000529767 0.000496205 0.000467782 0.000398165 0.000421343 0.000479183
+0.000490646 0.000533807 0.000487331 0.000462389 0.000494405 0.000506588
+0.000396088 0.000214805 -5.71606e-06 -0.000222674 -0.000200913 -7.8712e-05
+-5.059e-05 -3.93279e-05 -2.07566e-05 -8.61496e-05 -0.000113719 -0.00012044
+-0.000136202 -7.88968e-05 -5.41404e-05 -9.46914e-06 0.000106117 0.000233115
+0.000378884 0.00046245 0.000486887 0.000575768 0.000535495 0.000434383
+0.000427795 0.000311152 0.000349712 0.000471185 0.000356036 0.0002785
+0.000255537 0.000209144 0.000234788 0.000283061 0.000253895 0.000182337
+6.86244e-05 5.12942e-05 0.000197016 0.000224676 0.000278574 0.000363385
+0.000387517 0.000448066 0.000520482 0.000579161 0.000555867 0.000564754
+0.00044806;
+#X coords 0 1 299 -1 200 140 1 0 0;
+#X restore 682 40 graph;
+#X obj 683 204 metro 100;
+#X obj 743 204 adc~;
+#X msg 1007 209 stop, f 5;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array recorded_sound 76672 float 2;
+#X coords 0 1 76672 -1 200 140 1 0 0;
+#X restore 905 42 graph;
+#X text 908 7 SOUNDWAVE OF THE RECORDING;
+#X obj 683 184 loadbang;
+#X obj 684 222 tabwrite~ soundwave;
+#X floatatom 86 107 5 0 0 0 - - -;
+#X obj 166 134 sel 0 1;
+#X obj 166 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 185 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 118 177 s startREC;
+#X obj 185 177 s stopREC;
+#X obj 86 156 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 904 192 r startREC;
+#X obj 1007 191 r stopREC;
+#X obj 934 245 tabwrite~ recorded_sound;
+#X obj 1006 227 adc~;
+#X text 1037 228 Audio input;
+#X obj 124 307 timer;
+#X floatatom 124 327 5 0 0 0 - - -;
+#X obj 175 397 s recTime;
+#X obj 87 292 r startREC;
+#X obj 151 292 r stopREC;
+#X msg 163 348 1000;
+#X obj 124 362 /;
+#X floatatom 124 384 5 0 0 0 - - -;
+#X obj 163 329 r stopREC;
+#X msg 905 268 \; recorded_sound const 0;
+#X text 1049 268 Clear buffer;
+#X text 1049 282 before recording;
+#X obj 124 450 *;
+#X obj 151 436 samplerate~;
+#X obj 169 494 s filesize;
+#X floatatom 151 457 5 0 0 0 - - -;
+#X floatatom 124 481 5 0 0 0 - - -;
+#X text 173 380 Send duration of recording in seconds;
+#X text 168 476 Send size of recording in samples;
+#X floatatom 269 108 5 0 0 0 - - -;
+#X obj 269 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 288 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 246 177 s play;
+#X obj 269 134 sel 1 0;
+#X msg 685 477 \; make-mask 2000;
+#X obj 685 456 r recordMASK;
+#X obj 1316 333 dac~;
+#X obj 288 177 s stop;
+#X obj 1327 177 s~ rawRecording;
+#X obj 1316 266 *~;
+#X obj 86 79 route /MASKtoggle /RECtoggle /PLAYtoggle /DENOISERtoggle
+/MASKslider /VOLUMEslider;
+#X floatatom 355 108 5 0 0 0 - - -;
+#X obj 355 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 374 158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 355 134 sel 1 0;
+#X obj 331 177 s D_on;
+#X obj 373 177 s D_off;
+#X obj 1389 98 r D_off;
+#X obj 1441 99 r D_on;
+#X obj 1326 136 *~;
+#X msg 1389 121 0;
+#X msg 1441 121 1;
+#N canvas 699 141 565 454 hann-window 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array \$0-hann 1024 float 0;
+#X coords 0 1 1023 0 300 100 1;
+#X restore 82 311 graph;
+#X obj 378 165 osc~;
+#X obj 378 190 *~ -0.5;
+#X obj 378 214 +~ 0.5;
+#X obj 331 247 tabwrite~ \$0-hann;
+#X obj 37 88 r window-size;
+#X obj 38 173 /;
+#X obj 127 142 samplerate~;
+#X obj 38 251 s window-sec;
+#X obj 177 204 swap;
+#X obj 177 228 /;
+#X obj 177 252 s window-hz;
+#X obj 49 201 * 1000;
+#X obj 49 228 s window-msec;
+#X obj 38 115 t f b f;
+#X msg 173 92 resize \$1;
+#X obj 173 116 s \$0-hann;
+#X obj 330 105 r window-hz;
+#X msg 382 130 0;
+#X obj 330 131 t f b;
+#X text 15 8 calculate Hann window table (variable window size) and
+constants window-hz (fundamental frequency of analysis) \, window-sec
+and window-msec (analysis window size in seconds and msec).;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 14 0;
+#X connect 6 0 8 0;
+#X connect 6 0 12 0;
+#X connect 7 0 6 1;
+#X connect 7 0 9 1;
+#X connect 9 0 10 0;
+#X connect 9 1 10 1;
+#X connect 10 0 11 0;
+#X connect 12 0 13 0;
+#X connect 14 0 6 0;
+#X connect 14 0 9 0;
+#X connect 14 1 7 0;
+#X connect 14 2 15 0;
+#X connect 15 0 16 0;
+#X connect 17 0 19 0;
+#X connect 18 0 1 1;
+#X connect 19 0 1 0;
+#X connect 19 1 4 0;
+#X connect 19 1 18 0;
+#X restore 1375 446 pd hann-window;
+#X text 1259 392 -- APPLY DENOISING to rawRecording --;
+#N canvas 50 22 648 669 fft-analysis 0;
+#X obj 35 589 *~;
+#X obj 143 305 *~;
+#X obj 158 150 *~;
+#X obj 35 72 *~;
+#X obj 76 527 *~;
+#X obj 35 44 inlet~;
+#X obj 35 528 *~;
+#X obj 34 101 rfft~;
+#X obj 35 558 rifft~;
+#X obj 36 616 outlet~;
+#X obj 119 149 *~;
+#X obj 119 176 +~;
+#X obj 165 278 r mask-level;
+#X obj 100 422 /~;
+#X obj 355 23 block~ 1024 4;
+#X text 176 446 is signal power and "m" is mask.;
+#X obj 131 332 -~;
+#X obj 131 355 max~ 0;
+#X obj 99 448 q8_sqrt~;
+#X text 175 464 (zero if s < m).;
+#X obj 76 72 tabreceive~ \$0-hann;
+#X obj 69 590 tabreceive~ \$0-hann;
+#X text 91 98 real Fourier transform;
+#X obj 357 57 loadbang;
+#X msg 357 80 \; pd dsp 1 \; window-size 1024;
+#X text 193 355 ... but not less than zero;
+#X text 101 561 real inverse Fourier transform;
+#X text 196 498 normalize by 2/(3N) where N is window size;
+#X text 168 332 current power ("s") minus level-adjusted mask ("m")
+;
+#X text 156 175 compute power (call it "s") in each channel;
+#X obj 123 395 +~ 1e-20;
+#X text 203 395 protect against division by zero;
+#X text 179 426 compute sqrt((s-m)/s) where "s";
+#X text 296 204 <- subwindow calculates noise mask;
+#X obj 98 499 /~ 1536;
+#X obj 144 256 tabreceive~ current-mask;
+#X connect 0 0 9 0;
+#X connect 1 0 16 1;
+#X connect 2 0 11 1;
+#X connect 3 0 7 0;
+#X connect 4 0 8 1;
+#X connect 5 0 3 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 7 0 10 0;
+#X connect 7 0 10 1;
+#X connect 7 1 4 0;
+#X connect 7 1 2 0;
+#X connect 7 1 2 1;
+#X connect 8 0 0 0;
+#X connect 10 0 11 0;
+#X connect 11 0 16 0;
+#X connect 11 0 30 0;
+#X connect 12 0 1 1;
+#X connect 13 0 18 0;
+#X connect 16 0 17 0;
+#X connect 17 0 13 0;
+#X connect 18 0 34 0;
+#X connect 20 0 3 1;
+#X connect 21 0 0 1;
+#X connect 23 0 24 0;
+#X connect 30 0 13 1;
+#X connect 34 0 6 1;
+#X connect 34 0 4 1;
+#X connect 35 0 1 0;
+#X restore 1312 469 pd fft-analysis;
+#X obj 1312 447 hip~ 5;
+#X text 843 -17 -- Create recording --;
+#X floatatom 1018 479 0 0 1000 0 - - -;
+#X obj 1018 498 s mask-level;
+#X obj 1018 429 r MASKslider;
+#X text 1075 447 MASK max level;
+#X obj 1018 460 *;
+#X msg 1042 446 25;
+#X obj 1333 99 loadbang;
+#X obj 1381 227 r D_off;
+#X obj 1433 228 r D_on;
+#X obj 1325 228 loadbang;
+#X msg 1381 250 1;
+#X msg 1433 250 0;
+#X obj 1312 419 r~ rawRecording;
+#X obj 800 436 adc~;
+#X obj 800 462 hip~ 5;
+#N canvas 50 22 648 669 fft-analysis_mask 0;
+#X obj 35 589 *~;
+#X obj 143 305 *~;
+#X obj 158 150 *~;
+#X obj 35 72 *~;
+#X obj 76 527 *~;
+#X obj 35 44 inlet~;
+#X obj 35 528 *~;
+#X obj 34 101 rfft~;
+#X obj 35 558 rifft~;
+#X obj 119 149 *~;
+#X obj 119 176 +~;
+#X obj 165 278 r mask-level;
+#X obj 100 422 /~;
+#X obj 355 23 block~ 1024 4;
+#X text 176 446 is signal power and "m" is mask.;
+#X obj 131 332 -~;
+#X obj 131 355 max~ 0;
+#X obj 99 448 q8_sqrt~;
+#X text 175 464 (zero if s < m).;
+#X obj 76 72 tabreceive~ \$0-hann;
+#X obj 69 590 tabreceive~ \$0-hann;
+#N canvas 126 28 1154 495 calculate-mask 0;
+#X obj 125 379 inlet~;
+#X msg 371 283 0;
+#X msg 371 166 0;
+#X obj 240 196 float;
+#X obj 294 200 + 1;
+#X obj 240 144 bang~;
+#X obj 240 169 spigot;
+#X floatatom 411 218 0 0 0 0 - - -;
+#X obj 315 408 -~;
+#X obj 371 258 sel 0;
+#X obj 327 443 *~;
+#X obj 293 443 +~;
+#X floatatom 351 313 0 0 0 0 - - -;
+#X obj 240 219 t f f;
+#X obj 370 113 r make-mask;
+#X obj 371 141 t b f;
+#X obj 411 165 /;
+#X text 483 212 number of;
+#X text 491 227 frames;
+#X floatatom 481 166 0 0 0 0 - - -;
+#X obj 480 113 r window-msec;
+#X obj 481 136 / 4;
+#X text 521 133 hop size (analysis;
+#X text 546 149 period) in msec;
+#X obj 371 218 <;
+#X obj 235 258 expr 1/($f1+1);
+#X text 134 17 calculate a mask using N msec of background noise;
+#X text 43 354 current power (for each channel);
+#X text 367 430 average the current power into the last mask to get
+the new mask. The new value is weighted 1/n on the nth iteration.;
+#X text 390 312 weight to average in new power to mask;
+#X text 11 203 loop counting to desired;
+#X text 78 219 number of frames;
+#X text 72 39 This loops for "make-mask" milliseconds \, averaging
+power in each channel over that amount of time. This is done by a moving
+average whose weight is adjusted to average each new value equally
+with each of the accumulating ones.;
+#X floatatom 327 142 5 0 0 0 - - -;
+#X obj 292 468 tabsend~ current-mask;
+#X obj 359 408 tabreceive~ current-mask;
+#X connect 0 0 8 0;
+#X connect 1 0 12 0;
+#X connect 2 0 3 1;
+#X connect 2 0 24 0;
+#X connect 3 0 13 0;
+#X connect 3 0 4 0;
+#X connect 4 0 3 1;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 7 0 24 1;
+#X connect 8 0 10 0;
+#X connect 9 0 1 0;
+#X connect 10 0 11 1;
+#X connect 11 0 34 0;
+#X connect 12 0 10 1;
+#X connect 13 0 24 0;
+#X connect 13 1 25 0;
+#X connect 14 0 15 0;
+#X connect 14 0 33 0;
+#X connect 15 0 2 0;
+#X connect 15 1 16 0;
+#X connect 16 0 7 0;
+#X connect 20 0 21 0;
+#X connect 21 0 16 1;
+#X connect 21 0 19 0;
+#X connect 24 0 6 1;
+#X connect 24 0 9 0;
+#X connect 25 0 12 0;
+#X connect 35 0 8 1;
+#X connect 35 0 11 0;
+#X restore 132 203 pd calculate-mask;
+#X text 91 98 real Fourier transform;
+#X obj 357 57 loadbang;
+#X msg 357 80 \; pd dsp 1 \; window-size 1024;
+#X text 193 355 ... but not less than zero;
+#X text 101 561 real inverse Fourier transform;
+#X text 196 498 normalize by 2/(3N) where N is window size;
+#X text 168 332 current power ("s") minus level-adjusted mask ("m")
+;
+#X text 156 175 compute power (call it "s") in each channel;
+#X obj 123 395 +~ 1e-20;
+#X text 203 395 protect against division by zero;
+#X text 179 426 compute sqrt((s-m)/s) where "s";
+#X text 296 204 <- subwindow calculates noise mask;
+#X obj 98 499 /~ 1536;
+#X obj 144 256 tabreceive~ current-mask;
+#X connect 1 0 15 1;
+#X connect 2 0 10 1;
+#X connect 3 0 7 0;
+#X connect 4 0 8 1;
+#X connect 5 0 3 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 7 0 9 0;
+#X connect 7 0 9 1;
+#X connect 7 1 4 0;
+#X connect 7 1 2 0;
+#X connect 7 1 2 1;
+#X connect 8 0 0 0;
+#X connect 9 0 10 0;
+#X connect 10 0 15 0;
+#X connect 10 0 21 0;
+#X connect 10 0 30 0;
+#X connect 11 0 1 1;
+#X connect 12 0 17 0;
+#X connect 15 0 16 0;
+#X connect 16 0 12 0;
+#X connect 17 0 34 0;
+#X connect 19 0 3 1;
+#X connect 20 0 0 1;
+#X connect 23 0 24 0;
+#X connect 30 0 12 1;
+#X connect 34 0 6 1;
+#X connect 34 0 4 1;
+#X connect 35 0 1 0;
+#X restore 800 488 pd fft-analysis_mask;
+#N canvas 643 266 592 454 current-mask 0;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array current-mask 512 float 0;
+#X coords 0 0.1 511 0 400 300 1 0 0;
+#X restore 110 76 graph;
+#X text 25 14 This table (1002-mask) is the average power measured
+in each channel of the spectrum \, presumed to represent the noise
+floor.;
+#X restore 685 436 pd current-mask;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 400 -1 600 210 1 0 0;
+#X restore 34 2 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 400 250 1 0 0;
+#X restore 53 286 graph;
+#X text 712 10 PLOT LIVE SOUNDWAVE;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 490 350 1 0 0;
+#X restore 663 5 graph;
+#X text 246 264 startREC and stopSTOP (RECtime) --;
+#X text 50 264 -- Register elapsed time between;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 260 100 1 0 0;
+#X restore 678 420 graph;
+#X text 656 397 -- Create a current mask whenever user wants to --
+;
+#X obj 151 418 loadbang;
+#X obj 684 241 r filesize;
+#X obj 684 261 array size recorded_sound;
+#X obj 684 281 r startREC;
+#X obj 684 322 array size recorded_sound;
+#X text 982 398 -- Set range of MASK level --;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 200 100 1 0 0;
+#X restore 978 420 graph;
+#X text 1263 -18 -- PLAY ORIGINAL / DENOISED SOUND --;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 260 350 1 0 0;
+#X restore 1256 10 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 230 140 1 0 0;
+#X restore 1266 414 graph;
+#X obj 1532 115;
+#X obj 1316 310 *~;
+#X obj 1316 289 hip~ 3;
+#X obj 1363 306 r VOLUMEslider;
+#X obj 1312 534 dac~;
+#X obj 1312 511 *~;
+#X obj 1312 490 hip~ 3;
+#X obj 1359 507 r VOLUMEslider;
+#X floatatom 1359 531 5 0 0 0 - - -;
+#X obj 1316 19 adc~;
+#X obj 1351 20 r startREC;
+#X obj 1317 56 *~;
+#X msg 1351 41 1;
+#X msg 1421 41 0;
+#X obj 1421 20 r stopREC;
+#X msg 684 301 2.646e+07;
+#X text 745 299 comment;
+#X connect 1 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 61 0;
+#X connect 5 0 20 0;
+#X connect 6 0 7 0;
+#X connect 8 0 9 0;
+#X connect 12 0 18 0;
+#X connect 13 0 18 0;
+#X connect 14 0 28 0;
+#X connect 17 0 12 0;
+#X connect 19 0 25 0;
+#X connect 20 0 21 0;
+#X connect 20 1 22 0;
+#X connect 21 0 23 0;
+#X connect 22 0 24 0;
+#X connect 25 0 4 0;
+#X connect 26 0 28 0;
+#X connect 26 0 40 0;
+#X connect 27 0 14 0;
+#X connect 29 0 28 0;
+#X connect 31 0 32 0;
+#X connect 32 0 37 0;
+#X connect 34 0 31 0;
+#X connect 35 0 31 1;
+#X connect 36 0 37 1;
+#X connect 37 0 38 0;
+#X connect 38 0 33 0;
+#X connect 38 0 43 0;
+#X connect 39 0 36 0;
+#X connect 43 0 47 0;
+#X connect 44 0 43 1;
+#X connect 44 0 46 0;
+#X connect 47 0 45 0;
+#X connect 50 0 54 0;
+#X connect 51 0 53 0;
+#X connect 52 0 58 0;
+#X connect 54 0 51 0;
+#X connect 54 1 52 0;
+#X connect 56 0 55 0;
+#X connect 60 0 115 0;
+#X connect 61 0 19 0;
+#X connect 61 1 5 0;
+#X connect 61 2 50 0;
+#X connect 61 3 62 0;
+#X connect 61 4 6 0;
+#X connect 61 5 8 0;
+#X connect 62 0 65 0;
+#X connect 63 0 66 0;
+#X connect 64 0 67 0;
+#X connect 65 0 63 0;
+#X connect 65 1 64 0;
+#X connect 68 0 71 0;
+#X connect 69 0 72 0;
+#X connect 70 0 59 0;
+#X connect 71 0 70 1;
+#X connect 72 0 70 1;
+#X connect 75 0 119 0;
+#X connect 76 0 75 0;
+#X connect 78 0 79 0;
+#X connect 80 0 83 0;
+#X connect 80 0 82 0;
+#X connect 82 0 78 0;
+#X connect 83 0 82 1;
+#X connect 84 0 71 0;
+#X connect 85 0 88 0;
+#X connect 86 0 89 0;
+#X connect 87 0 88 0;
+#X connect 88 0 60 1;
+#X connect 89 0 60 1;
+#X connect 90 0 76 0;
+#X connect 91 0 92 0;
+#X connect 92 0 93 0;
+#X connect 103 0 44 0;
+#X connect 104 0 105 0;
+#X connect 106 0 128 0;
+#X connect 114 0 57 0;
+#X connect 114 0 57 1;
+#X connect 115 0 114 0;
+#X connect 116 0 114 1;
+#X connect 118 0 117 0;
+#X connect 118 0 117 1;
+#X connect 119 0 118 0;
+#X connect 120 0 118 1;
+#X connect 120 0 121 0;
+#X connect 122 0 124 0;
+#X connect 123 0 125 0;
+#X connect 124 0 70 0;
+#X connect 124 0 60 0;
+#X connect 125 0 124 1;
+#X connect 126 0 124 1;
+#X connect 127 0 126 0;
+#X connect 128 0 107 0;
