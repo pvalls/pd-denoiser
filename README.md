@@ -4,7 +4,7 @@ This is my final project for the Subject *Real Time Audio Processing* at [Univer
 
 In this project me and my partner [David Mitjana](https://github.com/mitji) implemented with [Pure Data](https://puredata.info) and [MobMuPlat](http://danieliglesia.com/mobmuplat/) a Recordings/Live Sound Denoiser app for mobile devices.
 
-For further reading read the document *RTAP_Final_Extended_Abstract_Mobile_Denoiser.pdf* on the repository.
+For further reading see document *RTAP_Final_Extended_Abstract_Mobile_Denoiser.pdf* on the repository.
 
 
 ## Environment Setup
